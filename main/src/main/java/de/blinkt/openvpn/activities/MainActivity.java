@@ -40,7 +40,7 @@ import de.blinkt.openvpn.views.TabBarView;
 
 
 public class MainActivity extends BaseActivity {
-
+    public static final String  APIURL= "http://sv.icodef.com/";
     public static Context context;
     private ViewPager mPager;
     private ScreenSlidePagerAdapter mPagerAdapter;

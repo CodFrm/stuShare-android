@@ -71,7 +71,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="#c37e00"
-            android:text="本程序仅供于湖南信息职业技术学院校内使用,专注于共享校园,如有问题请移步于信院南站Q群：175853183"
+            android:text="本程序仅供于湖南信息职业技术学院校使用"
             android:textColor="#FFFFFF"
             android:textSize="18dp" />
     </RelativeLayout>

@@ -19,17 +19,17 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:support-annotations:26.0.0'
-    compile 'com.android.support:cardview-v7:26.0.0'
-    compile 'com.android.support:recyclerview-v7:26.0.0'
+    implementation 'com.android.support:support-annotations:26.0.0'
+    implementation 'com.android.support:cardview-v7:26.0.0'
+    implementation 'com.android.support:recyclerview-v7:26.0.0'
     //    compile 'ch.acra:acra:4.5.0'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    testImplementation 'junit:junit:4.12'
 }
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 19
@@ -45,9 +45,9 @@ android {
             jni.srcDirs = [] //disable automatic ndk-build
         }
         
-        ovpn3 {
-         
-        }
+//        ovpn3 {
+//
+//        }
 
         debug {
 

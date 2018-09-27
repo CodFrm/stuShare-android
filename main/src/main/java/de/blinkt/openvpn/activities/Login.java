@@ -102,64 +102,12 @@ public class Login extends BaseActivity {
             accunt = params[0];
             password = params[1];
 
-            if (new httpcontent().GET("http://sv.icodef.com/", false).equals("ERROR"))
+            if (new httpcontent().GET(MainActivity.APIURL, false).equals("ERROR"))
                 return "无法连接到服务器";
-
             login = login(accunt, password);
-            if (login.equals("登陆成功")) {
-
-                String notice = new httpcontent().GET("http://sv.icodef.com/index/api/notice_pc", false);
-                try {
-                    VPNProfileList.noticeText = new JSONObject(notice).getString("msg");
-                } catch (JSONException e) {
-                }
-
-                try {
-                    url1 = new URL("http://sv.icodef.com/user/api/getauth");
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    getuser = (HttpURLConnection) url1.openConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                getuser.setRequestProperty("Cookie", MainActivity.uid_token);
-                getuser.setDoInput(true);
-                try {
-                    getuser.setRequestMethod("GET");
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                }
-                getuser.setConnectTimeout(1000);
-                getuser.setReadTimeout(1000);
-                try {
-                    user = new httpcontent().readstream(getuser.getInputStream());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Log.e("login", user);
-          /*      if (user != null) {
-                    Log.e("login", user);
-                }*/
-                if (user.indexOf("你没有相应的权限") != -1) {
-                    return "无法登录：你的注册帐号可能没有通过邮箱激活,请登录你填写的邮箱中查看激活连接";
-                }
-
-
-                if (user.matches("(.*)(自行车|摩托车|小汽车|免费用户)(.*)")) {
-                    String html = new httpcontent().GET("http://sv.icodef.com/user/index/index", true);
-
-                    Pattern pattern = Pattern.compile("(摩托车|自行车|小汽车|免费用户).\\d\\d\\d\\d-\\d\\d-\\d\\d.(\\d\\d|\\d):(\\d\\d|\\d):(\\d\\d|\\d)");
-                    Matcher matcher = pattern.matcher(html);
-                    if (matcher.find())
-                        MainActivity.outtime_date = matcher.group();
-                    else
-                        return "获取会员信息失败";
-
-                    Log.e("login114", MainActivity.outtime_date);
-                    return "YES_VIP";
-                } else return "你不是信院南站会员用户无法登录！";
+            if (login.equals("success")) {
+                VPNProfileList.noticeText = "欢迎使用校园网vpn系统";
+                return "success";
             } else {
                 return login;
             }
@@ -173,7 +121,7 @@ public class Login extends BaseActivity {
                 Log.e("ASASASA", "SSSSAAASASAS");
                 MainActivity.ACCOUNT = accunt;
                 MainActivity.PASSWORD = password;
-                Log.e("AS",MainActivity.ACCOUNT+"/"+accunt+MainActivity.PASSWORD );
+                Log.e("AS", MainActivity.ACCOUNT + "/" + accunt + MainActivity.PASSWORD);
                 if (checkBox.isChecked()) {
                     SharedPreferences.Editor shard = getSharedPreferences("user", MODE_PRIVATE).edit();
                     shard.putString("id", accunt);
@@ -192,16 +140,14 @@ public class Login extends BaseActivity {
 
     private String login(String user, String password) {
         JSONObject json = null;
-        String data = "user=" + user + "&pwd=" + password;
+        String data = "user=" + user + "&passwd=" + password;
         URL url = null;
         HttpURLConnection http = null;
         try {
-            url = new URL("http://sv.icodef.com/index/login/login");
+            url = new URL(MainActivity.APIURL + "login");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-
         try {
             http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod("POST");
@@ -231,7 +177,6 @@ public class Login extends BaseActivity {
             if (http.getResponseCode() == 200) {
                 InputStream in = http.getInputStream();
 
-
                 String str = new httpcontent().readstream(in);
                 try {
                     json = new JSONObject(str);
@@ -239,10 +184,10 @@ public class Login extends BaseActivity {
                     e.printStackTrace();
                 }
                 try {
-                    if (json.getString("msg").equals("登陆成功")) {
+                    if (json.getInt("code") == 0) {
                         List<String> map = http.getHeaderFields().get("Set-Cookie");
                         MainActivity.uid_token = map.get(0).substring(0, map.get(0).indexOf(";")) + ";" + map.get(1).substring(0, map.get(1).indexOf(";"));
-                        return json.getString("msg");
+                        return "success";
                     } else {
                         return json.getString("msg");
                     }
