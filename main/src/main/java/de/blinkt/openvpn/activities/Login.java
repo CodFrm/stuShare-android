@@ -65,7 +65,7 @@ public class Login extends BaseActivity {
         submit = findViewById(R.id.submit);
         checkBox = findViewById(R.id.checkbox);
         File file = new File("/data/user/0/de.blinkt.openvpn/shared_prefs/VPNList.xml");
-        if (file.exists() == true)
+        if (file.exists())
             file.delete();
 
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
@@ -117,11 +117,9 @@ public class Login extends BaseActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             submit.setClickable(true);
-            if (s.equals("YES_VIP")) {
-                Log.e("ASASASA", "SSSSAAASASAS");
+            if (s.equals("success")) {
                 MainActivity.ACCOUNT = accunt;
                 MainActivity.PASSWORD = password;
-                Log.e("AS", MainActivity.ACCOUNT + "/" + accunt + MainActivity.PASSWORD);
                 if (checkBox.isChecked()) {
                     SharedPreferences.Editor shard = getSharedPreferences("user", MODE_PRIVATE).edit();
                     shard.putString("id", accunt);

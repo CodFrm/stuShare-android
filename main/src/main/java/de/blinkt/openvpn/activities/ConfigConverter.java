@@ -394,8 +394,8 @@ public class ConfigConverter extends BaseActivity implements FileSelectCallback 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String srt = new httpcontent().GET("http://sv.icodef.com/user/api/getserver", true);
-            Log.e("config608", srt);
+            String srt = new httpcontent().GET(MainActivity.APIURL + "server", true);
+
             JSONObject jsonObject = null;
             JSONArray rows;
             try {
@@ -403,7 +403,8 @@ public class ConfigConverter extends BaseActivity implements FileSelectCallback 
                 rows = jsonObject.getJSONArray("rows");
                 for (int i = 0; i < rows.length(); i++) {
                     JSONObject item = rows.getJSONObject(i);
-                    if (!saveprofile(item.getString("name"), item.getString("config"), item.getString("count"))) {
+                    //item.getString("count")
+                    if (!saveprofile(item.getString("name"), item.getString("config"), "null")) {
                         continue;
                     }
                 }

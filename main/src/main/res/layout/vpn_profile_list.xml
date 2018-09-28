@@ -30,24 +30,24 @@
                 android:textColor="#e7e7e7" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/notice_main"
-                android:orientation="vertical"
-                android:padding="4dp">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="2dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginTop="2dp"-->
+                <!--android:background="@drawable/notice_main"-->
+                <!--android:orientation="vertical"-->
+                <!--android:padding="4dp">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/copyright_blinktgui"
-                    android:textColor="#e4e4e4" />
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/copyright_blinktgui"-->
+                    <!--android:textColor="#e4e4e4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                     android:id="@+id/outtime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="到期时间这"
+                    android:text="到期时间"
                     android:textColor="#e4e4e4" />
 
                 <TextView
